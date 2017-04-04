@@ -58,7 +58,7 @@ int Pop (tPilha *pilha, char *novoConteudo){
 
 int main(){
     int numExp = 0, i, j, cont = 0;
-    char Exp[cont][401], lixo, sinal;
+    char lixo, sinal;
     tPilha pilha1;
     tPilha pilha2;
 
@@ -68,34 +68,33 @@ int main(){
 
     char Aux[numExp][401];
 
-    while(numExp){
-        scanf("%s", Aux[numExp]);
-        numExp--;
+    while(cont < numExp){
+        scanf("%s", Aux[cont]);
+        cont++;
     }
 
     for (i = 0; i < numExp; i++){
         for (j = 0; j < strlen(Aux[i]); j++){
-            if (Aux[cont][i] == '('){
+            if (Aux[i][j] == '('){
                 Push(&pilha1, Aux[i][j]);
             }
 
             if (Aux[i][j] >= 'a' && Aux[i][j] <= 'z'){
-                Exp[i][cont] = Aux[i][j];
-                cont++;
+                printf("%c", Aux[i][j]);
             }
 
-            if (Aux[i][j] == '+' || Aux[i][j] == '-' || Aux[i][j] == '*' || Aux[i][j] == '^' || Aux[i][j] == '/')
+            if (Aux[i][j] == '+' || Aux[i][j] == '-' || Aux[i][j] == '*' || Aux[i][j] == '^' || Aux[i][j] == '/'){
                 Push(&pilha2, Aux[i][j]);
+            }
 
             if (Aux[i][j] == ')'){
                 Pop(&pilha1, &lixo);
-                Pop(&pilha2, &Exp[i][cont]);
-                //Exp[i][cont] = sinal;
-                printf("%c", Exp[i][cont]);
+                Pop(&pilha2, &sinal);
+                printf("%c", sinal);
             }
         }
-
+        printf("\n");
     }
 
-    return 1;
+    return 0;
 }
